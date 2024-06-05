@@ -2,10 +2,9 @@
 
 Write a program that allows user to
 
-- Light/dark mode toggle
-- Live previews
-- Fullscreen mode
-- Cross platform
+- add Student Record
+- take Attendance
+- Search Students Record
 
 ## Phase one (june 6 - 8)
 

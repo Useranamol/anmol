@@ -63,7 +63,13 @@ class Students:
         else:
             print(f"Student with ID {self.student_id} not found.")
 
+    def show_students(self):
+        self.students_record = self.read_json()
+        for student_name in self.students_record.get("students", {}).values():
+            print(student_name)
+
 
 students = Students()
 # edit_student = students.edit_student()
-delete_student = students.delete_student()
+# delete_student = students.delete_student()
+show_students = students.show_students()

@@ -1,18 +1,19 @@
-class Menu():
+from student_record import Records
 
+class Menu:
     def __init__(self):
-        self.welcome = input("Please Enter \n 1. For  Student Record \n 2. For Attendace record \n 3. For Search Student \n")
-        if self.welcome == 1 :
-            self.Student_record()
-            pass
-        elif self.welcome == 2:
-            self.Attendace_record()
-            pass
-        elif self.welcome == 3:
-            self.Search_student()
-            pass
-        else:
-            print("please Enter 1 or 2 or 3 \n Error")
-            self.__init__()
+        while True:
+            self.welcome = input("Please Enter:\n1. Student Record\n2. Attendance Record\n3. Search Student\n")
+            if self.welcome == "1":
+                Records()
+                break
+            elif self.welcome == "2":
+                self.Attendance_record()
+                pass
+            elif self.welcome == "3":
+                self.Search_student()
+                pass
+            else:
+                print("Please enter 1, 2, or 3. Try again.")
 
 menu = Menu()

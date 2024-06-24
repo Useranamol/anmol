@@ -70,6 +70,25 @@ class Students:
 
 
 students = Students()
-# edit_student = students.edit_student()
-# delete_student = students.delete_student()
-show_students = students.show_students()
+
+def Records():
+
+    while True:
+        student_input = input("Please enter:\n1. Show students\n2. Add students\n3. Edit student\n4. Delete student\n5. Exit\n")
+        if student_input == "1":
+            students.show_students()
+            break
+        elif student_input == "2":
+            students.add_students()
+            break
+        elif student_input == "3":
+            students.edit_student()
+            break
+        elif student_input == "4":
+            students.delete_student()
+            break
+        elif student_input == "5":
+            break
+        else:
+            print("Please enter 1, 2, 3, 4, or 5 to continue. Try again.")
+

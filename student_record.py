@@ -91,4 +91,5 @@ def Records():
             break
         else:
             print("Please enter 1, 2, 3, 4, or 5 to continue. Try again.")
+            Records()
 

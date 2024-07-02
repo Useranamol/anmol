@@ -1,0 +1,20 @@
+{
+  "2024-06_27": {
+    "student_id": "bibek",
+    "present": "absent"
+  },
+  "2024-06_28": [
+    {
+      "student_id ": "bb",
+      "present": "present"
+    },
+    {
+      "student_id ": "bibek",
+      "present": "present"
+    },
+    {
+      "student_id ": "anmol",
+      "present": "present"
+    }
+  ]
+}

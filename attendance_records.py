@@ -101,9 +101,18 @@ class Attendance:
             print(f"For date {key}, attendance records: {value}")
 
 
-
-
-attendace = Attendance()
-# attendace_record = attendace.attendance_record()
-attendace_record = attendace.show_student_attendance(day=datetime.datetime.now().strftime("%Y-%m-%d"))
-# edit_student = attendace.edit_attendance_record()
+    def students_attendace(self):
+        while True:
+            self.user_input = input("Please enter 1 . For attendace Record \n 2 . To Edit Attendace Record \n 3 . To Show Student Attendace \n " )
+            if self.user_input == "1":
+                self.attendace_records()
+                break
+            elif self.user_input == "2":
+                self.edit_attendance_record()
+                break
+            elif self.user_input == "3":
+                self.show_student_attendance()
+                break
+            else:
+                print("Error \nPlease enter 1 . For attendace Record \n 2 . To Edit Attendace Record \n 3 . To Show Student Attendace ")
+                self.students_attendace()

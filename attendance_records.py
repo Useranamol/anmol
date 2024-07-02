@@ -101,18 +101,17 @@ class Attendance:
             print(f"For date {key}, attendance records: {value}")
 
 
-    def students_attendace(self):
-        while True:
-            self.user_input = input("Please enter 1 . For attendace Record \n 2 . To Edit Attendace Record \n 3 . To Show Student Attendace \n " )
-            if self.user_input == "1":
-                self.attendace_records()
-                break
-            elif self.user_input == "2":
-                self.edit_attendance_record()
-                break
-            elif self.user_input == "3":
-                self.show_student_attendance()
-                break
-            else:
-                print("Error \nPlease enter 1 . For attendace Record \n 2 . To Edit Attendace Record \n 3 . To Show Student Attendace ")
-                self.students_attendace()
+attendace = Attendance()
+
+def Student_attendace():
+    while True:
+        user_input = input("Please Enter 1 . For Attendace \n 2 . To Edit Student Attendace \n 3 . To Show Attendace Record \n")
+        if user_input == "1":
+            attendace.attendance_records()
+        elif user_input == "2":
+            attendace.edit_attendance_record()
+        elif user_input == "3":
+            attendace.show_student_attendance()
+        else:
+            print("Input Error \n Please Enter 1 . For Attendace \n 2 . To Edit Student Attendace \n 3 . To Show Attendace Record")
+            Student_attendace()

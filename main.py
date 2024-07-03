@@ -1,5 +1,5 @@
 from student_record import Records
-from attendance_records import Student_attendace
+from attendance_records import Student_attendance
 class Menu:
     def __init__(self):
         while True:
@@ -8,7 +8,7 @@ class Menu:
                 Records()
                 break
             elif self.welcome == "2":
-                Student_attendace()
+                Student_attendance()
                 break
 
             else:

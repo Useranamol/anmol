@@ -3,7 +3,7 @@ from attendance_records import Student_attendace
 class Menu:
     def __init__(self):
         while True:
-            self.welcome = input("Please Enter:\n1. Student Record\n2. Attendance Record\n3. Search Student\n")
+            self.welcome = input("Please Enter:\n1. Student Record\n2. Attendance Record\n")
             if self.welcome == "1":
                 Records()
                 break

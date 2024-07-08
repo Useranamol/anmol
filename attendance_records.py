@@ -83,11 +83,9 @@ class Attendance:
                 self.name_of_student = input("Please enter the name of the student: ")
                 if self.name_of_student in self.students.students_record.get("students", {}).values():
                     self.change_attendance = input("Please enter 'present' or 'absent': ")
-                    self.attendance_records[self.to_edit] = {
-                        "student_id": self.name_of_student,
-                        "present": self.change_attendance.lower(),
-
-                    }
+                    for d in self.attendance_records[self.to_edit]:
+                        if d["student_id"] == self.name_of_student:
+                            d["present"] =  self.change_attendance.lower()
                     self.write_attendance_json(self.attendance_records)
                     break
                 else:
@@ -102,7 +100,7 @@ class Attendance:
             print(f"For date {key}, attendance records: {value}")
 
 
-#attendance = Attendance()
+
 
 def Student_attendance():
     attendance = Attendance()
@@ -117,3 +115,5 @@ def Student_attendance():
         else:
             print("Input Error \n Please Enter 1 . For Attendance \n 2 . To Edit Student Attendance \n 3 . To Show Attendance Record")
             Student_attendance()
+
+Student_attendance()

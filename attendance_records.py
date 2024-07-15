@@ -105,20 +105,7 @@ class Attendance:
 def Student_attendance():
     attendance = Attendance()
     while True:
-<<<<<<< HEAD
-        user_input = input("Please Enter 1 . For Attendace \n 2 . To Edit Student Attendace \n 3 . To Show Attendace Record \n 4 . To exit ")
-        if user_input == "1":
-            attendace.attendance_record()
-            break
-        elif user_input == "2":
-            attendace.edit_attendance_record()
-            break
-        elif user_input == "3":
-            attendace.show_student_attendance()
-            break
-        elif user_input == "4":
-            break
-=======
+
         user_input = input("Please Enter\n 1 . For Attendance \n 2 . To Edit Student Attendance \n 3 . To Show Attendance Record \n")
         if user_input == "1":
             attendance.attendance_record()
@@ -126,7 +113,6 @@ def Student_attendance():
             attendance.edit_attendance_record()
         elif user_input == "3":
             attendance.show_student_attendance()
->>>>>>> 138816085feef01053070518e05848315bc08727
         else:
             print("Input Error \n Please Enter 1 . For Attendance \n 2 . To Edit Student Attendance \n 3 . To Show Attendance Record")
             Student_attendance()

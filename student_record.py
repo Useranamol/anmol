@@ -74,7 +74,7 @@ students = Students()
 def Records():
 
     while True:
-        student_input = input("Please enter:\n1. Show students\n2. Add students\n3. Edit student\n4. Delete student\n5. Exit\n")
+        student_input = input("Please enter: \n1. Show students\n2. Add students\n3. Edit student\n4. Delete student\n5. Exit\n")
         if student_input == "1":
             students.show_students()
             break

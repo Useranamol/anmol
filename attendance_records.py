@@ -6,18 +6,18 @@ class Attendance:
     def __init__(self):
         self.students = Students()
         self.date = datetime.datetime.now().strftime("%Y-%m-%d")
-        self.attendace_records ={}
+        self.attendance_records ={}
 
-    def write_attendace_json(self, data):
+    def write_attendance_json(self, data):
         try:
-            with open('attendace_records.json', 'w') as file:
+            with open('attendance_records.json', 'w') as file:
                 json.dump(data, file, indent=2)
         except json.JSONDecodeError as e:
             print(f"Error encoding JSON: {e}")
 
     def read_attendance_json(self):
         try:
-            with open('attendace_records.json', 'r') as file:
+            with open('attendance_records.json', 'r') as file:
                 data = json.load(file)
             return data
         except FileNotFoundError:
@@ -33,42 +33,42 @@ class Attendance:
         if self.students.students_record is None:
             return
 
-        self.attendace_records = self.read_attendance_json()
+        self.attendance_records = self.read_attendance_json()
         self.day = datetime.datetime.now().strftime("%Y-%m_%d")
 
         while True:
 
-            self.tommorow = datetime.datetime.now() + datetime.timedelta(days=1)
+            self.tomorrow = datetime.datetime.now() + datetime.timedelta(days=1)
 
-            if self.attendace_records is None:
-                self.attendace_records = {}
+            if self.attendance_records is None:
+                self.attendance_records = {}
 
-            if self.day in self.attendace_records:
-                print(f" Attendace of {self.day} is already recorded .")
+            if self.day in self.attendance_records:
+                print(f" Attendance of {self.day} is already recorded .")
                 break
 
 
 
-            self.attendace_record_for_day = {}
+            self.attendance_record_for_day = {}
 
 
 
             for key in self.students.students_record.get("students" , {}).keys():
-                self.registry = input(f" Is {self.students.students_record["students"][key]}  Present or absent ? \n")
+                self.registry = input(f"Is {self.students.students_record['students'][key]} present or absent?\n")
                 if self.registry == "present".lower():
-                    self.attendace_record_for_day[key] = { "student_id "  : self.students.students_record["students"][key] , "present" : self.registry}
+                    self.attendance_record_for_day[key] = { "student_id "  : self.students.students_record["students"][key] , "present" : self.registry}
                 else:
                     print("please enter 'present' or 'absent' on lower ")
                     return
 
 
-            self.attendace_records[self.day] = list(self.attendace_record_for_day.values())
+            self.attendance_records[self.day] = list(self.attendance_record_for_day.values())
 
-            self.write_attendace_json(self.attendace_records)
+            self.write_attendance_json(self.attendance_records)
 
-            self.to_continue = input("Do you want to continue the attendace for next day ? \n")
+            self.to_continue = input("Do you want to continue the attendance for next day ? \n")
             if self.to_continue == "yes".lower():
-                self.day = self.tommorow.strftime("%Y-%m-%d")
+                self.day = self.tomorrow.strftime("%Y-%m-%d")
 
             else:
                 break
@@ -83,28 +83,29 @@ class Attendance:
                 self.name_of_student = input("Please enter the name of the student: ")
                 if self.name_of_student in self.students.students_record.get("students", {}).values():
                     self.change_attendance = input("Please enter 'present' or 'absent': ")
-                    self.attendace_records[self.to_edit] = {
-                        "student_id": self.name_of_student,
-                        "present": self.change_attendance.lower(),
-
-                    }
-                    self.write_attendace_json(self.attendace_records)
+                    for d in self.attendance_records[self.to_edit]:
+                        if d["student_id"] == self.name_of_student:
+                            d["present"] =  self.change_attendance.lower()
+                    self.write_attendance_json(self.attendance_records)
                     break
                 else:
                     print("Student not found. Please enter a valid student name.")
             else:
                 print("Date not found. Please enter a valid date.")
 
-    def show_student_attendance(self, day):
+    def show_student_attendance(self):
+        date_input = input("Please enter the date of attendance date: ")
         self.attendance_records = self.read_attendance_json()
-        for key, value in self.attendance_records.get(day, {}).items():
+        for key, value in self.attendance_records.get(date_input, {}).items():
             print(f"For date {key}, attendance records: {value}")
 
 
-attendace = Attendance()
 
-def Student_attendace():
+
+def Student_attendance():
+    attendance = Attendance()
     while True:
+<<<<<<< HEAD
         user_input = input("Please Enter 1 . For Attendace \n 2 . To Edit Student Attendace \n 3 . To Show Attendace Record \n 4 . To exit ")
         if user_input == "1":
             attendace.attendance_record()
@@ -117,6 +118,17 @@ def Student_attendace():
             break
         elif user_input == "4":
             break
+=======
+        user_input = input("Please Enter\n 1 . For Attendance \n 2 . To Edit Student Attendance \n 3 . To Show Attendance Record \n")
+        if user_input == "1":
+            attendance.attendance_record()
+        elif user_input == "2":
+            attendance.edit_attendance_record()
+        elif user_input == "3":
+            attendance.show_student_attendance()
+>>>>>>> 138816085feef01053070518e05848315bc08727
         else:
-            print("Input Error \n Please Enter 1 . For Attendace \n 2 . To Edit Student Attendace \n 3 . To Show Attendace Record")
-            Student_attendace()
+            print("Input Error \n Please Enter 1 . For Attendance \n 2 . To Edit Student Attendance \n 3 . To Show Attendance Record")
+            Student_attendance()
+
+Student_attendance()

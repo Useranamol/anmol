@@ -75,21 +75,23 @@ class Attendance:
 
     def edit_attendance_record(self):
         self.attendance_records = self.read_attendance_json()
-        self.students.students_record = self.students.read_json()
 
         while True:
             self.to_edit = input("Please enter the date of attendance history: ")
             if self.to_edit in self.attendance_records.keys():
-                self.name_of_student = input("Please enter the name of the student: ")
-                if self.name_of_student in self.students.students_record.get("students", {}).values():
-                    self.change_attendance = input("Please enter 'present' or 'absent': ")
-                    for d in self.attendance_records[self.to_edit]:
-                        if d["student_id"] == self.name_of_student:
-                            d["present"] =  self.change_attendance.lower()
-                    self.write_attendance_json(self.attendance_records)
-                    break
-                else:
-                    print("Student not found. Please enter a valid student name.")
+                self.student = input("please enter the name of student. \n")
+                if self.student in self.students.students_record.get("students", {}).keys():
+                    for key in self.students.students_record.get("students", {}).keys():
+                        self.change_attendance = input("Please enter 'present' or 'absent': ")
+                        if self.change_attendance == "present" or "absent":
+                            self.attendance_record_for_day[self.to_edit] = {
+                                "student_id": self.students.students_record["students"][key],
+                                "present": self.change_attendance.lower()}
+                            self.write_attendance_json(self.attendance_record_for_day)
+                        else:
+                            print("please enter 'present' or 'absent' .")
+
+                break
             else:
                 print("Date not found. Please enter a valid date.")
 
@@ -106,15 +108,15 @@ def Student_attendance():
     attendance = Attendance()
     while True:
 
-        user_input = input("Please Enter\n 1 . For Attendance \n 2 . To Edit Student Attendance \n 3 . To Show Attendance Record \n")
+        user_input = input("Please Enter\n 1 . For Attendance \n 2 . To Edit Student Attendance \n 3 . To Show Attendance Record \n 4 . To exit \n")
         if user_input == "1":
             attendance.attendance_record()
         elif user_input == "2":
             attendance.edit_attendance_record()
         elif user_input == "3":
             attendance.show_student_attendance()
+        elif user_input == "4":
+            break
         else:
             print("Input Error \n Please Enter 1 . For Attendance \n 2 . To Edit Student Attendance \n 3 . To Show Attendance Record")
             Student_attendance()
-
-Student_attendance()

@@ -1,20 +1,14 @@
-def edit_attendance_record(self):
-    self.attendance_records = self.read_attendance_json()
+def show_history(self):
+    self.students.students_record = self.students.read_json()
+    self.user_student = input("Please enter the Student Id: ")
 
-    while True:
-        self.to_edit = input("Please enter the date of attendance history: ")
-        if self.to_edit in self.attendance_records.keys():
-            self.student = input("please enter the name of student. \n")
-            if self.student in self.students.students_record.get("students", {}).keys():
-                for key in self.students.students_record.get("students", {}).keys():
-                    self.change_attendance = input("Please enter 'present' or 'absent': ")
-                    if self.change_attendance == "present" or "absent":
-                        self.attendance_record_for_day[self.to_edit] = {
-                            "student_id": self.students.students_record["students"][key],
-                            "present": self.change_attendance.lower()}
-                    else:
-                        print("please enter 'present' or 'absent' .")
-
-            break
+    if self.date in self.attendance_records:
+        for x in self.attendance_records:
+            student_attendance = self.attendance_records[x]
+        if self.user_student in student_attendance:
+            attendance_status = student_attendance[self.user_student]["status"]
+            print(f"Attendance status for {self.user_student[]} on {self.date}: {attendance_status}")
         else:
-            print("Date not found. Please enter a valid date.")
+            print(f"No attendance record found for {self.user_student} on {self.date}.")
+    else:
+        print(f"No attendance records available for {self.date}.")

@@ -2,6 +2,7 @@ import json
 import datetime
 from student_record import Students
 
+
 class Attendance:
     def __init__(self):
         self.students = Students()
@@ -97,18 +98,34 @@ class Attendance:
             print(f"Attendance records for {date_input}:")
             for student_id, record in self.attendance_records[date_input].items():
                 print(f"Student ID: {student_id}, Status: {record['status']}")
+
+
         else:
             print("No attendance record found for the given date.")
+
+    def show_history(self):
+        self.students.students_record = self.students.read_json()
+        self.user_student = input("Please enter the Student ID: ")
+
+
+        for date, records in self.attendance_records.items():
+            if self.user_student in records:
+
+                student_attendance = records[self.user_student]
+                student_status = student_attendance["status"]
+                print(f"The attendance record of {self.user_student} on {date} is {student_status}")
+            else:
+                print(f"No attendance record found for {self.user_student} on {date}")
+
+
+
 
 def student_attendance():
     attendance = Attendance()
     while True:
-<<<<<<< HEAD
 
-        user_input = input("Please Enter\n 1 . For Attendance \n 2 . To Edit Student Attendance \n 3 . To Show Attendance Record \n 4 . To exit \n")
-=======
-        user_input = input("Please Enter\n 1. For Attendance \n 2. To Edit Student Attendance \n 3. To Show Attendance Record \n 4. To Exit\n")
->>>>>>> 65b1c1e517002d42ca3440efbdd74731d24cf126
+        user_input = input("Please Enter\n 1. For Attendance \n 2. To Edit Student Attendance \n 3. To Show Attendance Record \n 4. To Show History attendace of studdent \n 5. To exit \n")
+
         if user_input == "1":
             attendance.attendance_record()
         elif user_input == "2":
@@ -116,13 +133,12 @@ def student_attendance():
         elif user_input == "3":
             attendance.show_student_attendance()
         elif user_input == "4":
+            attendance.show_history()
+        elif user_input == "5":
             break
         else:
-<<<<<<< HEAD
-            print("Input Error \n Please Enter 1 . For Attendance \n 2 . To Edit Student Attendance \n 3 . To Show Attendance Record")
-            Student_attendance()
-=======
-            print("Invalid input. Please enter 1, 2, 3, or 4.")
 
-student_attendance()
->>>>>>> 65b1c1e517002d42ca3440efbdd74731d24cf126
+            print("Input Error \n Please Enter the Given inputs \n")
+
+
+

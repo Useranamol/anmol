@@ -1,7 +1,9 @@
 import json
 import datetime
 from student_record import Students
+from file import MultiDictJSONHandler
 
+multidictionary = MultiDictJSONHandler("attendance_records.json")
 
 class Attendance:
     def __init__(self):
@@ -9,28 +11,28 @@ class Attendance:
         self.date = datetime.datetime.now().strftime("%Y-%m-%d")
         self.attendance_records = self.read_attendance_json()
 
-    def write_attendance_json(self, data):
-        try:
-            with open('attendance_records.json', 'w') as file:
-                json.dump(data, file, indent=2)
-        except json.JSONDecodeError as e:
-            print(f"Error encoding JSON: {e}")
-
-    def read_attendance_json(self):
-        try:
-            with open('attendance_records.json', 'r') as file:
-                data = json.load(file)
-            return data
-        except FileNotFoundError:
-            print("Attendance file not found. Creating a new one.")
-            self.write_attendance_json({})
-            return {}
-        except json.JSONDecodeError as e:
-            print(f"Error decoding JSON: {e}")
-            return {}
+    # def write_attendance_json(self, data):
+    #     try:
+    #         with open('attendance_records.json', 'w') as file:
+    #             json.dump(data, file, indent=2)
+    #     except json.JSONDecodeError as e:
+    #         print(f"Error encoding JSON: {e}")
+    #
+    # def read_attendance_json(self):
+    #     try:
+    #         with open('attendance_records.json', 'r') as file:
+    #             data = json.load(file)
+    #         return data
+    #     except FileNotFoundError:
+    #         print("Attendance file not found. Creating a new one.")
+    #         self.write_attendance_json({})
+    #         return {}
+    #     except json.JSONDecodeError as e:
+    #         print(f"Error decoding JSON: {e}")
+    #         return {}
 
     def attendance_record(self):
-        self.students.students_record = self.students.read_json()
+        self.students.students_record = multidictionary.read_json()
 
         if not self.students.students_record:
             print("No student records found.")
@@ -54,7 +56,7 @@ class Attendance:
                     print("Please enter 'present' or 'absent'.")
 
         self.attendance_records[self.date] = attendance_record_for_day
-        self.write_attendance_json(self.attendance_records)
+        multidictionary.write_json(self.attendance_records)
 
         while True:
             to_continue = input("Do you want to continue the attendance for the next day? (yes/no) ").lower()
@@ -68,7 +70,7 @@ class Attendance:
 
     def edit_attendance_record(self):
 
-        self.students.students_record = self.students.read_json()
+        self.students.students_record = multidictionary.read_json()
 
         while True:
             date_to_edit = input("Please enter the date of the attendance record to edit (YYYY-MM-DD): ")
@@ -81,7 +83,7 @@ class Attendance:
                             for record in self.attendance_records[date_to_edit].values():
                                 if record["student_id"] == student_name:
                                     record["status"] = new_status
-                                    self.write_attendance_json(self.attendance_records)
+                                    multidictionary.write_json(self.attendance_records)
                                     print("Attendance record updated.")
                                     return
                         else:
@@ -104,11 +106,12 @@ class Attendance:
             print("No attendance record found for the given date.")
 
     def show_history(self):
-        self.students.students_record = self.students.read_json()
+        self.students.students_record = multidictionary.read_json()
         self.user_student = input("Please enter the Student ID: ")
 
 
         for date, records in self.attendance_records.items():
+            
             if self.user_student in records:
 
                 student_attendance = records[self.user_student]

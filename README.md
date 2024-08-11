@@ -1,3 +1,12 @@
+##Prerequisite
+
+- create venv and activate it, run following command
+  py -m venv venv
+  ./venv/scripts/activate
+
+- install requirements.txt
+- run main.py
+
 ## Requirements
 
 Write a program that allows user to

@@ -2,6 +2,7 @@ import json
 import datetime
 from student_record import Students
 from file import MultiDictJSONHandler
+import pandas as pd
 
 multidictionary = MultiDictJSONHandler("attendance_records.json")
 
@@ -9,7 +10,7 @@ class Attendance:
     def __init__(self):
         self.students = Students()
         self.date = datetime.datetime.now().strftime("%Y-%m-%d")
-        self.attendance_records = self.read_attendance_json()
+        self.attendance_records = multidictionary.read_json()
 
     # def write_attendance_json(self, data):
     #     try:
@@ -107,6 +108,7 @@ class Attendance:
 
     def show_history(self):
         self.students.students_record = multidictionary.read_json()
+        # df = pd.read_json('multidictionary.read_json')
         self.user_student = input("Please enter the Student ID: ")
 
 
